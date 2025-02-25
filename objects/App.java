@@ -66,5 +66,10 @@ class App {
     Boolean result2 = p.equals("Jane");
     System.out.printf("p.equals('Jane') returns %b\n", result2);
 
+    // calling a static method
+    Person.staticMethod();
+    Person.count++;
+    Person.staticMethod();
+    Person.staticMethod();
   }
 }

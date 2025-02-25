@@ -4,6 +4,8 @@ class Person {
   // attributes of the object
   String name;
 
+  static int count = 0;
+
   // Constructor
   // this is the default constructor
   public Person() {
@@ -46,6 +48,12 @@ class Person {
   // private methods are not accessible outside the class
   private void privateMethod() {
     System.out.println("This is a private method");
+  }
+
+  // static methods
+  public static void staticMethod() {
+    count++;
+    System.out.printf("This is a static method, count = %d\n", count);
   }
 
   @Override
