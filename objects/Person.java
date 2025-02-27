@@ -50,8 +50,13 @@ class Person {
     System.out.println("This is a private method");
   }
 
+  public void incrementCount() {
+    count++;
+    System.out.printf("This is a public method, count = %d\n", count);
+  }
+
   // static methods
-  public static void staticMethod() {
+  private static void staticMethod() {
     count++;
     System.out.printf("This is a static method, count = %d\n", count);
   }

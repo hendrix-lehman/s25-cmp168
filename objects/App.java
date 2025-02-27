@@ -13,6 +13,8 @@ class App {
 
     xyz.greet();
 
+    System.out.println("from xyz.count = " + xyz.count);
+
     // this is how you call a method on an object
     // the method is called getName
     // it is a getter method
@@ -28,8 +30,11 @@ class App {
       // create a new Person object
       Person p = new Person("Person " + i);
       // assign the Person object to the array
+      p.incrementCount();
       persons[i] = p;
     }
+
+    System.out.println("from xyz.count (later)= " + xyz.count);
 
     // now, let's print the names of the Person objects
     for (int i = 0; i < 10; i++) {
@@ -66,10 +71,13 @@ class App {
     Boolean result2 = p.equals("Jane");
     System.out.printf("p.equals('Jane') returns %b\n", result2);
 
+    // p.staticMethod();
+    p.incrementCount();
+
     // calling a static method
-    Person.staticMethod();
-    Person.count++;
-    Person.staticMethod();
-    Person.staticMethod();
+    // Person.staticMethod();
+    // Person.count++;
+    // Person.staticMethod();
+    // Person.staticMethod();
   }
 }
