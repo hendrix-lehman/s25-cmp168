@@ -10,6 +10,10 @@ class VolvoSedan extends Volvo {
     System.out.println("VolvoSedan is running");
   }
 
+  public void run(String message) {
+    System.out.printf("VolvoSedan - %s\n", message);
+  }
+
   // public String toString() {
   // return "VolvoSedan";
   // }

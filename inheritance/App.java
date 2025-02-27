@@ -15,6 +15,10 @@ class App {
     VolvoSedan volvoSedan = new VolvoSedan();
     System.out.println(volvoSedan.toString());
     volvoSedan.run();
+    volvoSedan.run("Hello");
+
+    // Volvo.Radio radio = new Volvo.Radio();
+    // radio.play();
 
   }
 }
