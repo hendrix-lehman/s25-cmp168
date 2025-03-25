@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
 
 class App {
 
@@ -39,11 +40,12 @@ class App {
   }
 
   public static void outputToFile() {
+    FileOutputStream fos = null;
     try {
       File file = new File("./output.txt");
       if (file.exists() && file.canWrite() && file.isFile()) {
         System.out.println("File exists and is writable.");
-        FileOutputStream fos = new FileOutputStream(file);
+        fos = new FileOutputStream(file);
         fos.write("Hello, World!".getBytes());
         fos.close();
       } else {
@@ -53,6 +55,81 @@ class App {
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("An error occurred.");
+    } finally {
+      if (fos != null) {
+        try {
+          fos.close();
+        } catch (Exception e) {
+        }
+      }
+    }
+  }
+
+  public static void appendToFile() {
+    PrintWriter pw = null;
+    // FileOutputStream fos = null;
+    try {
+      File file = new File("./output.txt");
+      if (file.exists() && file.canWrite() && file.isFile()) {
+        System.out.println("File exists and is writable.");
+        // fos = new FileOutputStream(file);
+        pw = new PrintWriter(file);
+        pw.append("Hello, World!\n");
+        pw.append("next line\n");
+        pw.flush();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("An error occurred.");
+    } finally {
+      // if (fos != null) {
+      // try {
+      // fos.close();
+      // } catch (Exception e) {
+      // }
+      // }
+      if (pw != null) {
+        pw.close();
+      }
+    }
+  }
+
+  public static void copyFile() {
+    FileInputStream fis = null;
+    FileOutputStream fos = null;
+    try {
+      File file = new File("./output.txt");
+      if (file.exists() && file.canRead() && file.isFile()) {
+        fis = new FileInputStream(file);
+        fos = new FileOutputStream("./output_copy.txt");
+        int b;
+        while ((b = fis.read()) != -1) {
+          fos.write(b);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("An error occurred.");
+    } finally {
+      if (fis != null) {
+        try {
+          fis.close();
+        } catch (Exception e) {
+        }
+      }
+      if (fos != null) {
+        try {
+          fos.close();
+        } catch (Exception e) {
+        }
+      }
+    }
+  }
+
+  public static void deleteFile() {
+    File file = new File("./output_copy.txt");
+    if (file.exists() && file.isFile()) {
+      file.delete();
     }
   }
 
@@ -60,6 +137,9 @@ class App {
     // keyboardInput();
     // fileInput();
     // outputToConsole();
-    outputToFile();
+    // outputToFile();
+    // appendToFile();
+    // copyFile();
+    deleteFile();
   }
 }
