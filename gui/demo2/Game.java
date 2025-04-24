@@ -34,6 +34,8 @@ class Game extends JFrame {
 
     // get a random question
     String[] question = getRandomQuestion();
+    String wrongAnswer = getRandomWrongAnswer();
+
     JLabel questionLabel = new JLabel(question[0]);
     questionLabel.setFont(questionLabel.getFont().deriveFont(24f));
     questionLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -42,7 +44,9 @@ class Game extends JFrame {
     // panel for answers
     JPanel answerPanel = new JPanel();
     JButton correctButton = new JButton(question[1]);
-    JButton wrongButton = new JButton(getRandomWrongAnswer());
+    correctButton.addActionListener(new ButtonClickListener(question[0], question[1]));
+    JButton wrongButton = new JButton(wrongAnswer);
+    wrongButton.addActionListener(new ButtonClickListener(question[0], wrongAnswer));
 
     addButtons(answerPanel, correctButton, wrongButton);
 
@@ -51,6 +55,12 @@ class Game extends JFrame {
     add(panel);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
+  }
+
+  // reset the game
+  public void resetGame() {
+    dispose();
+    new Game();
   }
 
   // select a random wrong answer
@@ -91,6 +101,7 @@ class Game extends JFrame {
   class ButtonClickListener implements ActionListener {
     private String question;
     private String answer;
+    private String[] options = { "Keep Playing", "Exit" };
 
     public ButtonClickListener(String question, String answer) {
       this.question = question;
@@ -100,9 +111,25 @@ class Game extends JFrame {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (verifyAnswer(question, answer)) {
-        JOptionPane.showMessageDialog(null, "Correct!");
+        int response = JOptionPane.showOptionDialog(null, answer + " is correct!", "Correct Answer",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, options, null);
+        if (response == 0) {
+          // continue playing
+          resetGame();
+        } else {
+          System.exit(0);
+        }
       } else {
-        JOptionPane.showMessageDialog(null, "Wrong!");
+        int response = JOptionPane.showOptionDialog(null, answer + " is wrong!", "Wrong Answer",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE, null, options, null);
+        if (response == 0) {
+          // continue playing
+          resetGame();
+        } else {
+          System.exit(0);
+        }
       }
     }
   }
