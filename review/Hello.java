@@ -1,4 +1,5 @@
 class Hello {
+  // hello
 
   // entry-point of a Java program
   public static void main(String[] args) {
